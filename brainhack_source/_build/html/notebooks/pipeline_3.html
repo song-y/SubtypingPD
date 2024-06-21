@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="../" data-theme="dark">
 
   <head>
     <meta charset="utf-8" />
@@ -13,8 +13,8 @@
   
   
   <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
@@ -51,7 +51,7 @@
   </head>
   
   
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
 
   
   
@@ -120,11 +120,9 @@
   
     
     
-      
     
-    
-    <img src="../_static/bh.png" class="logo__image only-light" alt="Subtyping PD 1.0 documentation - Home"/>
-    <script>document.write(`<img src="../_static/bh.png" class="logo__image only-dark" alt="Subtyping PD 1.0 documentation - Home"/>`);</script>
+    <img src="../_static/bh.png" class="logo__image only-dark" alt="Subtyping PD 1.0 documentation - Home"/>
+    <script>document.write(`<img src="../_static/bh.png" class="logo__image only-light" alt="Subtyping PD 1.0 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -291,11 +289,20 @@ document.write(`
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-<nav class="bd-docs-nav bd-links"
-     aria-label="Section Navigation">
-  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"></div>
-</nav></div>
+<h3><a href="../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="pipeline_1.html">Pipeline #1 - Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline_2.html">Pipeline #2 - Imaging</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pipeline #3 - Statistical analyses</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Pipeline-overview">Pipeline overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Descriptive-statistics">Descriptive statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Statistical-tests-and-results-visualization">Statistical tests and results visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</div>
     </div>
   
   
@@ -349,7 +356,7 @@ document.write(`
                   
   <section id="Pipeline-#3---Statistical-analyses">
 <h1>Pipeline #3 - Statistical analyses<a class="headerlink" href="#Pipeline-#3---Statistical-analyses" title="Link to this heading">#</a></h1>
-<p><img alt="65f4805cae994d03a8a7b16b9cf83ec1" class="no-scaled-link" src="../_images/pipeline3.png" style="width: 550px;" /></p>
+<p><img alt="d2fa21e30eea4d01a6eb1a985d853dc5" class="no-scaled-link" src="../_images/pipeline3.png" style="width: 550px;" /></p>
 <p>This final phase of the project addresses our main question:</p>
 <p><strong>Is there a PD subtype associated with faster cognitive and neural decline?</strong></p>
 <p>To answer this question, statistical analyses will be run to compare the identified subtypes on their cognitive and neural decline.</p>
@@ -495,7 +502,7 @@ ml_subtype
 <li><p><strong>Neural</strong> decline measured with cortical thickness and volume data</p></li>
 </ul>
 <p>We saw in early analyses that the MoCA score was <strong>not normally distributed</strong> accross the COPN dataset:</p>
-<p><img alt="084c54287a93499685445596c84b257b" src="../_images/moca_skewed.png" /></p>
+<p><img alt="7bd1ad88d81a4e5481e490bd2cb20dfc" src="../_images/moca_skewed.png" /></p>
 <p>A solution would be to perform non-parametric tests when analyzing the cognition variable. An appropriate test is the <strong>Kruskal-Wallis test with Bonferroni correction</strong> for multiple comparisons.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:

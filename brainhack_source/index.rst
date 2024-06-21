@@ -42,7 +42,7 @@ Pipeline #3: Statistical analyses
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
    notebooks/pipeline_1.ipynb

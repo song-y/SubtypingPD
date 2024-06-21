@@ -27,3 +27,10 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 html_theme = 'pydata_sphinx_theme'
 html_static_path = ['_static']
 html_logo = "images/bh.png"
+
+html_context = {
+   # ...
+   "default_mode": "dark"
+}
+
+html_sidebars = { '**': ['globaltoc.html'] }
