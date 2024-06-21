@@ -293,22 +293,7 @@ document.write(`
 <h3><a href="../index.html">Table of Contents</a></h3>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Pipeline #1 - Clustering</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#Pipeline-overview">Pipeline overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Data-visualization">Data visualization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Inputting/adjusting-hyperparameters">Inputting/adjusting hyperparameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Running-the-algorithm">Running the algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Model-stability-tracking">Model stability tracking</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Adjusted-Rand-Index-(ARI)">Adjusted Rand Index (ARI)</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#Model-performance-evaluation">Model performance evaluation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Silhouette-coefficient">Silhouette coefficient</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#What-is-next?">What is next?</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pipeline #1 - Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline_2.html">Pipeline #2 - Imaging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline_3.html">Pipeline #3 - Statistical analyses</a></li>
 </ul>
@@ -366,7 +351,7 @@ document.write(`
                   
   <section id="Pipeline-#1---Clustering">
 <h1>Pipeline #1 - Clustering<a class="headerlink" href="#Pipeline-#1---Clustering" title="Link to this heading">#</a></h1>
-<p><img alt="b457c507cd884e9ebc07078c605ee1be" class="no-scaled-link" src="../_images/pipeline1.png" style="width: 550px;" /></p>
+<p><img alt="d302eb63f8ab46be80aebde5ec747f84" class="no-scaled-link" src="../_images/pipeline1.png" style="width: 550px;" /></p>
 <p>This is the very first phase of the project. The idea here is to run an unsupervised <a class="reference external" href="https://github.com/ucl-pond/pySuStaIn/tree/master">ML algorithm</a> on cross-sectional clinical data of PD patients, to uncover data-driven disease phenotypes (subtypes) with distinct temporal progression patterns.</p>
 <section id="Pipeline-overview">
 <h2>Pipeline overview<a class="headerlink" href="#Pipeline-overview" title="Link to this heading">#</a></h2>
@@ -382,7 +367,7 @@ document.write(`
 <p>Let’s dive in!</p>
 <p>First, let’s load the libraries that will be used.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -392,6 +377,8 @@ document.write(`
 <span class="kn">import</span> <span class="nn">pySuStaIn</span>
 <span class="kn">import</span> <span class="nn">wandb</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">adjusted_rand_score</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+
 
 <span class="n">output_folder</span> <span class="o">=</span> <span class="s2">&quot;/Users/song/Documents/dev/repos/10. brainhack 2024/bhSubtypingPD/brainhack_source/results/&quot;</span>
 <span class="n">input_folder</span> <span class="o">=</span> <span class="s2">&quot;/Users/song/Documents/dev/repos/10. brainhack 2024/bhSubtypingPD/brainhack_source/data/&quot;</span>
@@ -1236,66 +1223,20 @@ ARI:  0.1443848207063997
 <p>The silhouette score is a metric that measures how well each data point fits into its assigned cluster, by measuring how similar a point is to its own cluster (cohesion) compared to other clusters (separation). Values range from -1 to 1, where a higher value indicates better-defined clusters.</p>
 <p><strong>Input the output_no of a model to compute its silhouette coefficient.</strong></p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[132]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># User input for output_no</span>
 <span class="n">output_no</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter output_no: &quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selected model: #&quot;</span><span class="p">,</span> <span class="n">output_no</span><span class="p">)</span>
 
-<span class="c1"># Computing the silhouette coefficient</span>
-<br/><br/><br/><br/><br/><br/></pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Selected model: # 532
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[127]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">pairwise_distances</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># TODO This needs to be dynamic</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;/Users/song/Documents/dev/repos/10. brainhack 2024/SubtypingPD/brainhack_source/results/841/841.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;3st&quot;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">7</span><span class="p">:</span> <span class="mi">33</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="s1">&#39;ml_subtype&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
-<span class="n">kmeans_model</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="n">kmeans_model</span><span class="o">.</span><span class="n">labels_</span>
-<span class="n">metrics</span><span class="o">.</span><span class="n">silhouette_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/Users/song/Library/Python/3.9/lib/python/site-packages/sklearn/cluster/_kmeans.py:1416: FutureWarning: The default value of `n_init` will change from 10 to &#39;auto&#39; in 1.4. Set the value of `n_init` explicitly to suppress the warning
-  super()._check_params_vs_input(X, default_n_init=10)
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[127]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-0.5528190123564095
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[129]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="c1"># Computing the silhouette coefficient</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Silhouette coefficient: &#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">.</span><span class="n">silhouette_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">))</span>
 <br/></pre></div>
 </div>
 </div>
@@ -1304,163 +1245,11 @@ Selected model: # 532
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[[5.1 3.5 1.4 0.2]
- [4.9 3.  1.4 0.2]
- [4.7 3.2 1.3 0.2]
- [4.6 3.1 1.5 0.2]
- [5.  3.6 1.4 0.2]
- [5.4 3.9 1.7 0.4]
- [4.6 3.4 1.4 0.3]
- [5.  3.4 1.5 0.2]
- [4.4 2.9 1.4 0.2]
- [4.9 3.1 1.5 0.1]
- [5.4 3.7 1.5 0.2]
- [4.8 3.4 1.6 0.2]
- [4.8 3.  1.4 0.1]
- [4.3 3.  1.1 0.1]
- [5.8 4.  1.2 0.2]
- [5.7 4.4 1.5 0.4]
- [5.4 3.9 1.3 0.4]
- [5.1 3.5 1.4 0.3]
- [5.7 3.8 1.7 0.3]
- [5.1 3.8 1.5 0.3]
- [5.4 3.4 1.7 0.2]
- [5.1 3.7 1.5 0.4]
- [4.6 3.6 1.  0.2]
- [5.1 3.3 1.7 0.5]
- [4.8 3.4 1.9 0.2]
- [5.  3.  1.6 0.2]
- [5.  3.4 1.6 0.4]
- [5.2 3.5 1.5 0.2]
- [5.2 3.4 1.4 0.2]
- [4.7 3.2 1.6 0.2]
- [4.8 3.1 1.6 0.2]
- [5.4 3.4 1.5 0.4]
- [5.2 4.1 1.5 0.1]
- [5.5 4.2 1.4 0.2]
- [4.9 3.1 1.5 0.2]
- [5.  3.2 1.2 0.2]
- [5.5 3.5 1.3 0.2]
- [4.9 3.6 1.4 0.1]
- [4.4 3.  1.3 0.2]
- [5.1 3.4 1.5 0.2]
- [5.  3.5 1.3 0.3]
- [4.5 2.3 1.3 0.3]
- [4.4 3.2 1.3 0.2]
- [5.  3.5 1.6 0.6]
- [5.1 3.8 1.9 0.4]
- [4.8 3.  1.4 0.3]
- [5.1 3.8 1.6 0.2]
- [4.6 3.2 1.4 0.2]
- [5.3 3.7 1.5 0.2]
- [5.  3.3 1.4 0.2]
- [7.  3.2 4.7 1.4]
- [6.4 3.2 4.5 1.5]
- [6.9 3.1 4.9 1.5]
- [5.5 2.3 4.  1.3]
- [6.5 2.8 4.6 1.5]
- [5.7 2.8 4.5 1.3]
- [6.3 3.3 4.7 1.6]
- [4.9 2.4 3.3 1. ]
- [6.6 2.9 4.6 1.3]
- [5.2 2.7 3.9 1.4]
- [5.  2.  3.5 1. ]
- [5.9 3.  4.2 1.5]
- [6.  2.2 4.  1. ]
- [6.1 2.9 4.7 1.4]
- [5.6 2.9 3.6 1.3]
- [6.7 3.1 4.4 1.4]
- [5.6 3.  4.5 1.5]
- [5.8 2.7 4.1 1. ]
- [6.2 2.2 4.5 1.5]
- [5.6 2.5 3.9 1.1]
- [5.9 3.2 4.8 1.8]
- [6.1 2.8 4.  1.3]
- [6.3 2.5 4.9 1.5]
- [6.1 2.8 4.7 1.2]
- [6.4 2.9 4.3 1.3]
- [6.6 3.  4.4 1.4]
- [6.8 2.8 4.8 1.4]
- [6.7 3.  5.  1.7]
- [6.  2.9 4.5 1.5]
- [5.7 2.6 3.5 1. ]
- [5.5 2.4 3.8 1.1]
- [5.5 2.4 3.7 1. ]
- [5.8 2.7 3.9 1.2]
- [6.  2.7 5.1 1.6]
- [5.4 3.  4.5 1.5]
- [6.  3.4 4.5 1.6]
- [6.7 3.1 4.7 1.5]
- [6.3 2.3 4.4 1.3]
- [5.6 3.  4.1 1.3]
- [5.5 2.5 4.  1.3]
- [5.5 2.6 4.4 1.2]
- [6.1 3.  4.6 1.4]
- [5.8 2.6 4.  1.2]
- [5.  2.3 3.3 1. ]
- [5.6 2.7 4.2 1.3]
- [5.7 3.  4.2 1.2]
- [5.7 2.9 4.2 1.3]
- [6.2 2.9 4.3 1.3]
- [5.1 2.5 3.  1.1]
- [5.7 2.8 4.1 1.3]
- [6.3 3.3 6.  2.5]
- [5.8 2.7 5.1 1.9]
- [7.1 3.  5.9 2.1]
- [6.3 2.9 5.6 1.8]
- [6.5 3.  5.8 2.2]
- [7.6 3.  6.6 2.1]
- [4.9 2.5 4.5 1.7]
- [7.3 2.9 6.3 1.8]
- [6.7 2.5 5.8 1.8]
- [7.2 3.6 6.1 2.5]
- [6.5 3.2 5.1 2. ]
- [6.4 2.7 5.3 1.9]
- [6.8 3.  5.5 2.1]
- [5.7 2.5 5.  2. ]
- [5.8 2.8 5.1 2.4]
- [6.4 3.2 5.3 2.3]
- [6.5 3.  5.5 1.8]
- [7.7 3.8 6.7 2.2]
- [7.7 2.6 6.9 2.3]
- [6.  2.2 5.  1.5]
- [6.9 3.2 5.7 2.3]
- [5.6 2.8 4.9 2. ]
- [7.7 2.8 6.7 2. ]
- [6.3 2.7 4.9 1.8]
- [6.7 3.3 5.7 2.1]
- [7.2 3.2 6.  1.8]
- [6.2 2.8 4.8 1.8]
- [6.1 3.  4.9 1.8]
- [6.4 2.8 5.6 2.1]
- [7.2 3.  5.8 1.6]
- [7.4 2.8 6.1 1.9]
- [7.9 3.8 6.4 2. ]
- [6.4 2.8 5.6 2.2]
- [6.3 2.8 5.1 1.5]
- [6.1 2.6 5.6 1.4]
- [7.7 3.  6.1 2.3]
- [6.3 3.4 5.6 2.4]
- [6.4 3.1 5.5 1.8]
- [6.  3.  4.8 1.8]
- [6.9 3.1 5.4 2.1]
- [6.7 3.1 5.6 2.4]
- [6.9 3.1 5.1 2.3]
- [5.8 2.7 5.1 1.9]
- [6.8 3.2 5.9 2.3]
- [6.7 3.3 5.7 2.5]
- [6.7 3.  5.2 2.3]
- [6.3 2.5 5.  1.9]
- [6.5 3.  5.2 2. ]
- [6.2 3.4 5.4 2.3]
- [5.9 3.  5.1 1.8]]
-[1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
- 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
- 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 2 2 2 2 0 2 2 2 2
- 2 2 0 0 2 2 2 2 0 2 0 2 0 2 2 0 0 2 2 2 2 2 0 2 2 2 2 0 2 2 2 0 2 2 2 0 2
- 2 0]
+Selected model: # 841
+Silhouette coefficient:  0.003243252594606985
 </pre></div></div>
 </div>
+<p>A silhouette coefficient close to 0 indicates poorly defined clusters. In a case like this one, depending where we are in our ML pipeline, we should consider retuning the model.</p>
 <p>Furthermore, the authors of the algorithm provide the following code for plotting the models’ likelihood. These plots help in choosing the appropriate model (most appropriate number of subtypes to fit the data).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[125]:
@@ -1501,16 +1290,17 @@ Selected model: # 532
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_pipeline_1_35_0.png" src="../_images/notebooks_pipeline_1_35_0.png" />
+<img alt="../_images/notebooks_pipeline_1_34_0.png" src="../_images/notebooks_pipeline_1_34_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_pipeline_1_35_1.png" src="../_images/notebooks_pipeline_1_35_1.png" />
+<img alt="../_images/notebooks_pipeline_1_34_1.png" src="../_images/notebooks_pipeline_1_34_1.png" />
 </div>
 </div>
+<p>I will analyse these plots along with the stability and performance metrics, in order to choose the most fitting model.</p>
 </section>
 </section>
 <section id="What-is-next?">

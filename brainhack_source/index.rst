@@ -32,6 +32,7 @@ Pipeline #2: Imaging
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 |   - Raw MRI conversion to BIDS
 |   - Freesurfer preprocessing
+|      - `Small section of the pipeline written in .sh <https://github.com/song-y/SubtypingPD/tree/main/brainhack_source/resources/freesurferPreproc>`_
 |   - Manipulating neuroimaging data
 
 Pipeline #3: Statistical analyses

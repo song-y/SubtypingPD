@@ -294,22 +294,7 @@ document.write(`
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="pipeline_1.html">Pipeline #1 - Clustering</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Pipeline #2 - Imaging</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#Pipeline-overview">Pipeline overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#BIDS-conversion">BIDS conversion</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Config-file">Config file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#BIDS-format">BIDS format</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#Freesurfer-preprocessing">Freesurfer preprocessing</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Parallelizing-the-process-on-Compute-Canada">Parallelizing the process on Compute Canada</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Cortical-volume">Cortical volume</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#Manipulating-neuroimaging-data">Manipulating neuroimaging data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#What-is-next?">What is next?</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pipeline #2 - Imaging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline_3.html">Pipeline #3 - Statistical analyses</a></li>
 </ul>
 </div>
@@ -366,7 +351,7 @@ document.write(`
                   
   <section id="Pipeline-#2---Imaging">
 <h1>Pipeline #2 - Imaging<a class="headerlink" href="#Pipeline-#2---Imaging" title="Link to this heading">#</a></h1>
-<p><img alt="8677661520e04a6b95319bc376caa572" src="../_images/pipeline2.png" /></p>
+<p><img alt="9063bd987f0f45ea975f2ce1aa25e763" src="../_images/pipeline2.png" /></p>
 <p>This second phase of the project involves preparing structural MRI data for analysis. Since clusters will have been identified, we aim to compare them based on neural decline, measured through cortical thickness and volume. Therefore, the MRI data must be prepared and preprocessed to extract the data of interest.</p>
 <section id="Pipeline-overview">
 <h2>Pipeline overview<a class="headerlink" href="#Pipeline-overview" title="Link to this heading">#</a></h2>
@@ -398,12 +383,12 @@ document.write(`
 <p>The MRI data is in DICOM format. The dcm files need to be converted to BIDS format for preprocessing. The tool used for this conversion is <a class="reference external" href="https://unfmontreal.github.io/Dcm2Bids/3.1.1/">dcm2bids</a>.</p>
 <section id="Config-file">
 <h3>Config file<a class="headerlink" href="#Config-file" title="Link to this heading">#</a></h3>
-<p>Following the installation of dcm2bids, the dcm2bids_config.json files used for conversion were prepared for 3 subjects whose MRI images were to be converted as a mock test. An example of config file can be found ‘here’.</p>
+<p>Following the installation of dcm2bids, the dcm2bids_config.json files used for conversion were prepared for 3 subjects whose MRI images were to be converted as a mock test. An example of config file can be found <a class="reference external" href="https://github.com/song-y/SubtypingPD/blob/main/brainhack_source/resources/dcm2bids_config.json">here</a>.</p>
 </section>
 <section id="BIDS-format">
 <h3>BIDS format<a class="headerlink" href="#BIDS-format" title="Link to this heading">#</a></h3>
 <p>Following the conversion, the files were formatted as follows:</p>
-<p><img alt="968d0b25188d4b7da1b74ae7d766f4fd" src="../_images/bids_tree.png" /></p>
+<p><img alt="9f7439231a6942f8a51d0c763395008d" src="../_images/bids_tree.png" /></p>
 </section>
 </section>
 <section id="Freesurfer-preprocessing">
@@ -411,12 +396,12 @@ document.write(`
 <p><a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3685476/">Freesurfer</a> is an open-source tool for performing a wide range of procedures on neuroimaging data. As part of the current project, Freesurfer was used for its automated process of cortical reconstruction.</p>
 <section id="Parallelizing-the-process-on-Compute-Canada">
 <h3>Parallelizing the process on Compute Canada<a class="headerlink" href="#Parallelizing-the-process-on-Compute-Canada" title="Link to this heading">#</a></h3>
-<p>A bash script was written to automate the task (<a class="reference external" href="https://surfer.nmr.mgh.harvard.edu/fswiki/LongitudinalProcessing">workflow</a>). The script was lauched on a loop for parallelization on the Compute Canada Cedar cluster. See ‘resources/freesurferPreproc/’ for scripts.</p>
+<p>A bash script was written to automate the task (<a class="reference external" href="https://surfer.nmr.mgh.harvard.edu/fswiki/LongitudinalProcessing">workflow</a>). The script was lauched on a loop for parallelization on the Compute Canada Cedar cluster. See <a class="reference external" href="https://github.com/song-y/SubtypingPD/tree/main/brainhack_source/resources/freesurferPreproc">resources/freesurferPreproc/</a> for scripts.</p>
 </section>
 <section id="Cortical-volume">
 <h3>Cortical volume<a class="headerlink" href="#Cortical-volume" title="Link to this heading">#</a></h3>
 <p>Cortical volume values were successfully extracted from obtained ‘output_folder/sub-id/stats/aseg.stats’ files:</p>
-<p><img alt="7415af2987764fa8a2e134ccdd8e9ed4" src="../_images/aseg.stats.png" /></p>
+<p><img alt="8001bc9fe73d4260ab2859b20785741b" src="../_images/aseg.stats.png" /></p>
 </section>
 </section>
 <section id="Manipulating-neuroimaging-data">
