@@ -1,0 +1,21 @@
+{
+    "descriptions": [
+      {
+        "datatype": "anat",
+        "modalityLabel": "T1w",
+        "criteria": {
+          "SeriesDescription": "SAG IR-FSPGR",
+          "ProtocolName": "PCAN-MCI - SESSION A_MAR"
+        }
+      },
+      {
+        "datatype": "anat",
+        "modalityLabel": "FLAIR",
+        "criteria": {
+          "SeriesDescription": "APU:Sag CUBE FLAIR",
+          "ProtocolName": "PCAN-MCI - SESSION A_MAR"
+        }
+      }
+    ]
+  }
+  

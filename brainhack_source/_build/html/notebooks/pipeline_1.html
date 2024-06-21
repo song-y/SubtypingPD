@@ -1,0 +1,1633 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Pipeline #1 - Clustering &#8212; Subtyping PD 1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/pipeline_1';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pipeline #2 - Imaging" href="pipeline_2.html" />
+    <link rel="prev" title="Grandpa is moody, will his cognition decline? Predicting cognitive and neural decline in Parkinson’s disease from non-motor symptoms evolution" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bh.png" class="logo__image only-light" alt="Subtyping PD 1.0 documentation - Home"/>
+    <script>document.write(`<img src="../_static/bh.png" class="logo__image only-dark" alt="Subtyping PD 1.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item pst-header-nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Pipeline #1 - Clustering
+  </a>
+</li>
+
+
+<li class="nav-item pst-header-nav-item">
+  <a class="nav-link nav-internal" href="pipeline_2.html">
+    Pipeline #2 - Imaging
+  </a>
+</li>
+
+
+<li class="nav-item pst-header-nav-item">
+  <a class="nav-link nav-internal" href="pipeline_3.html">
+    Pipeline #3 - Statistical analyses
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item pst-header-nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Pipeline #1 - Clustering
+  </a>
+</li>
+
+
+<li class="nav-item pst-header-nav-item">
+  <a class="nav-link nav-internal" href="pipeline_2.html">
+    Pipeline #2 - Imaging
+  </a>
+</li>
+
+
+<li class="nav-item pst-header-nav-item">
+  <a class="nav-link nav-internal" href="pipeline_3.html">
+    Pipeline #3 - Statistical analyses
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Pipeline #1...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Pipeline-#1---Clustering">
+<h1>Pipeline #1 - Clustering<a class="headerlink" href="#Pipeline-#1---Clustering" title="Link to this heading">#</a></h1>
+<p><img alt="c3e7e796a0a848f4890342b4e9f70d29" class="no-scaled-link" src="../_images/pipeline1.png" style="width: 550px;" /></p>
+<p>This is the very first phase of the project. The idea here is to run an unsupervised <a class="reference external" href="https://github.com/ucl-pond/pySuStaIn/tree/master">ML algorithm</a> on cross-sectional clinical data of PD patients, to uncover data-driven disease phenotypes (subtypes) with distinct temporal progression patterns.</p>
+<section id="Pipeline-overview">
+<h2>Pipeline overview<a class="headerlink" href="#Pipeline-overview" title="Link to this heading">#</a></h2>
+<p>This pipeline runs the SuStaIn clustering algorithm on non-motor symtoms (NMS) data. Specifically, it does the following:</p>
+<ul class="simple">
+<li><p>Data visualization</p></li>
+<li><p>Prepares/adjusts the hyperparameters of the algorithm</p></li>
+<li><p>Runs the algorithm</p></li>
+<li><p>Model stability tracking</p></li>
+<li><p>Model performance evaluation</p></li>
+</ul>
+<p><strong>A disclaimer:</strong> the scientific results found in this notebook (and the other two) are all somewhat (if not very) preliminary and serve the bigger purpose of providing a visual representation of what the final products will look like.</p>
+<p>Let’s dive in!</p>
+<p>First, let’s load the libraries that will be used.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pySuStaIn</span>
+<span class="kn">import</span> <span class="nn">wandb</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">adjusted_rand_score</span>
+
+<span class="n">output_folder</span> <span class="o">=</span> <span class="s2">&quot;/Users/song/Documents/dev/repos/10. brainhack 2024/bhSubtypingPD/brainhack_source/results/&quot;</span>
+<span class="n">input_folder</span> <span class="o">=</span> <span class="s2">&quot;/Users/song/Documents/dev/repos/10. brainhack 2024/bhSubtypingPD/brainhack_source/data/&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Now, let’s load the data.</p>
+<p>The project will utilize three independent datasets containing participants with PD: a training set, a validation set, and a testing set.</p>
+<ol class="arabic simple">
+<li><p>Canadian Open Parkinson Network (COPN)</p></li>
+<li><p>Parkinson’s Progression Marker Initiative (PPMI)</p></li>
+<li><p>UK Biobank</p></li>
+</ol>
+<p>Currently, the two first datasets are available.</p>
+<div class="line-block">
+<div class="line"><strong>To load a dataset, input its abbreviation (‘copn’ or ‘ppmi’).</strong></div>
+</div>
+<p>The pipeline will need to be rerun from here for every dataset to be loaded.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># User input for dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter dataset (copn/ppmi): &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selected dataset:&quot;</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+
+<span class="c1"># Dictionary to map dataset names to file paths</span>
+<span class="n">data_paths</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;copn&quot;</span><span class="p">:</span> <span class="n">input_folder</span> <span class="o">+</span> <span class="s2">&quot;dataset_1_copn/data.xlsx&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ppmi&quot;</span><span class="p">:</span> <span class="n">input_folder</span> <span class="o">+</span> <span class="s2">&quot;dataset_2_ppmi/data.xlsx&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># Get the data path based on the dataset</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="n">data_paths</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">data_path</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid dataset name provided&quot;</span><span class="p">)</span>
+
+<span class="c1"># Dataset demographics</span>
+<span class="n">demographics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;demographics&quot;</span><span class="p">)</span>
+
+<span class="c1"># Algorithm inputs</span>
+
+<span class="c1"># prob_nl input</span>
+<span class="n">prob_nl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;1_prob_nl&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;prob_nl:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;shape:&quot;</span><span class="p">,</span> <span class="n">prob_nl</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob_nl</span><span class="p">)</span>
+
+<span class="c1"># prob_score input</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;2_prob_score&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+<span class="n">original_shape</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">shape</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">original_shape</span><span class="p">)</span>
+
+<span class="n">desired_shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">prob_nl</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">prob_score</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">desired_shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;prob_score:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;shape:&quot;</span><span class="p">,</span> <span class="n">prob_score</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob_score</span><span class="p">)</span>
+
+<span class="c1"># score_vals input</span>
+<span class="n">score_vals</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;3_score_vals&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;score_vals&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;shape:&quot;</span><span class="p">,</span> <span class="n">score_vals</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">score_vals</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Selected dataset: copn
+prob_nl:
+shape: (956, 26)
+[[0.752 0.851 0.741 ... 0.885 0.93  0.874]
+ [0.752 0.851 0.065 ... 0.029 0.017 0.874]
+ [0.062 0.037 0.065 ... 0.029 0.017 0.031]
+ ...
+ [0.062 0.851 0.065 ... 0.029 0.017 0.031]
+ [0.752 0.851 0.065 ... 0.029 0.93  0.874]
+ [0.752 0.851 0.741 ... 0.029 0.017 0.031]]
+(24856, 4)
+prob_score:
+shape: (956, 26, 4)
+[[[0.06198765 0.06198765 0.06198765 0.06198765]
+  [0.0371787  0.0371787  0.0371787  0.0371787 ]
+  [0.0648523  0.0648523  0.0648523  0.0648523 ]
+  ...
+  [0.02875    0.02875    0.02875    0.02875   ]
+  [0.0174964  0.0174964  0.0174964  0.0174964 ]
+  [0.0314284  0.0314284  0.0314284  0.0314284 ]]
+
+ [[0.06198765 0.06198765 0.06198765 0.06198765]
+  [0.0371787  0.0371787  0.0371787  0.0371787 ]
+  [0.7405908  0.0648523  0.0648523  0.0648523 ]
+  ...
+  [0.885      0.02875    0.02875    0.02875   ]
+  [0.0174964  0.9300144  0.0174964  0.0174964 ]
+  [0.0314284  0.0314284  0.0314284  0.0314284 ]]
+
+ [[0.06198765 0.06198765 0.7520494  0.06198765]
+  [0.0371787  0.8512852  0.0371787  0.0371787 ]
+  [0.7405908  0.0648523  0.0648523  0.0648523 ]
+  ...
+  [0.02875    0.885      0.02875    0.02875   ]
+  [0.9300144  0.0174964  0.0174964  0.0174964 ]
+  [0.0314284  0.8742864  0.0314284  0.0314284 ]]
+
+ ...
+
+ [[0.06198765 0.06198765 0.06198765 0.7520494 ]
+  [0.0371787  0.0371787  0.0371787  0.0371787 ]
+  [0.0648523  0.0648523  0.7405908  0.0648523 ]
+  ...
+  [0.02875    0.885      0.02875    0.02875   ]
+  [0.0174964  0.0174964  0.9300144  0.0174964 ]
+  [0.0314284  0.8742864  0.0314284  0.0314284 ]]
+
+ [[0.06198765 0.06198765 0.06198765 0.06198765]
+  [0.0371787  0.0371787  0.0371787  0.0371787 ]
+  [0.0648523  0.0648523  0.7405908  0.0648523 ]
+  ...
+  [0.885      0.02875    0.02875    0.02875   ]
+  [0.0174964  0.0174964  0.0174964  0.0174964 ]
+  [0.0314284  0.0314284  0.0314284  0.0314284 ]]
+
+ [[0.06198765 0.06198765 0.06198765 0.06198765]
+  [0.0371787  0.0371787  0.0371787  0.0371787 ]
+  [0.0648523  0.0648523  0.0648523  0.0648523 ]
+  ...
+  [0.885      0.02875    0.02875    0.02875   ]
+  [0.0174964  0.9300144  0.0174964  0.0174964 ]
+  [0.8742864  0.0314284  0.0314284  0.0314284 ]]]
+score_vals
+shape: (26, 4)
+[[1 2 3 4]
+ [1 2 3 0]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 0]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]
+ [1 2 3 4]]
+</pre></div></div>
+</div>
+</section>
+<section id="Data-visualization">
+<h2>Data visualization<a class="headerlink" href="#Data-visualization" title="Link to this heading">#</a></h2>
+<p>Let’s look at the summary statistics and distribution of some basic demographic variables.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Age</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">],</span>
+            <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>           <span class="c1"># increase &quot;resolution&quot;</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span>    <span class="c1"># change color</span>
+            <span class="n">kde</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Age in &quot;</span> <span class="o">+</span> <span class="n">dataset</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+count    387.000000
+mean      67.369509
+std        9.108181
+min       36.000000
+25%       62.000000
+50%       68.000000
+75%       74.000000
+max       90.000000
+Name: Age, dtype: float64
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 1.0, &#39;Age in COPN&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_1_7_2.png" src="../_images/notebooks_pipeline_1_7_2.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Age at onset</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;Onset&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;Onset&#39;</span><span class="p">],</span>
+            <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+            <span class="n">kde</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Age at onset in &quot;</span> <span class="o">+</span> <span class="n">dataset</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Age at onset&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+count    384.000000
+mean      61.403646
+std        9.677358
+min       34.000000
+25%       55.000000
+50%       62.000000
+75%       68.000000
+max       88.000000
+Name: Onset, dtype: float64
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0, &#39;Age at onset&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_1_8_2.png" src="../_images/notebooks_pipeline_1_8_2.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Disease duration</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;Duration&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;Duration&#39;</span><span class="p">],</span>
+            <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span>
+            <span class="n">kde</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Disease duration in &quot;</span> <span class="o">+</span> <span class="n">dataset</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Disease duration (years)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+count    385.000000
+mean       7.910130
+std        5.698714
+min        0.500000
+25%        3.500000
+50%        6.300000
+75%       10.900000
+max       30.200000
+Name: Duration, dtype: float64
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0, &#39;Disease duration (years)&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_1_9_2.png" src="../_images/notebooks_pipeline_1_9_2.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Years of education</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;Education&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;Education&#39;</span><span class="p">],</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;pink&#39;</span><span class="p">,</span>
+            <span class="n">kde</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Years of education in &quot;</span> <span class="o">+</span> <span class="n">dataset</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Education (years)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+count    386.000000
+mean      10.849741
+std        3.308896
+min        1.000000
+25%        9.000000
+50%       11.000000
+75%       13.000000
+max       17.000000
+Name: Education, dtype: float64
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0, &#39;Education (years)&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_1_10_2.png" src="../_images/notebooks_pipeline_1_10_2.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[79]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gender</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;Gender&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span><span class="s1">&#39;Gender&#39;</span><span class="p">,</span>
+              <span class="n">data</span> <span class="o">=</span> <span class="n">demographics</span><span class="p">,</span>
+              <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set3&quot;</span>
+              <span class="p">)</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Gender in &quot;</span> <span class="o">+</span> <span class="n">dataset</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+count    401.000000
+mean       1.324190
+std        0.468656
+min        1.000000
+25%        1.000000
+50%        1.000000
+75%        2.000000
+max        2.000000
+Name: Gender, dtype: float64
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[79]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 1.0, &#39;Gender in COPN&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_1_11_2.png" src="../_images/notebooks_pipeline_1_11_2.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Distribution of the MoCA score (cognition)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;MoCA&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;MoCA&#39;</span><span class="p">],</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span>
+            <span class="n">kde</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;MoCA score in &quot;</span> <span class="o">+</span> <span class="n">dataset</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;MoCA&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+count    349.000000
+mean      25.031519
+std        3.566548
+min        6.000000
+25%       23.000000
+50%       25.000000
+75%       28.000000
+max       30.000000
+Name: MoCA, dtype: float64
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0, &#39;MoCA&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_1_12_2.png" src="../_images/notebooks_pipeline_1_12_2.png" />
+</div>
+</div>
+<p>The distribution of the MoCA in the COPN dataset is very negatively skewed! This will have to be considered when performing statistical analyses on the variable.</p>
+<p>How does the age vary among stages of the disease?</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[99]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Age by H&amp;Y stages</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">demographics</span><span class="p">,</span>
+               <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Hoehn&quot;</span><span class="p">,</span>
+               <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span>
+               <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+               <span class="n">inner</span><span class="o">=</span><span class="s2">&quot;quart&quot;</span><span class="p">,</span>
+               <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set2&quot;</span>
+               <span class="p">)</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Age by disease stage in &quot;</span> <span class="o">+</span> <span class="n">dataset</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;H&amp;Y stage&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[99]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0, &#39;H&amp;Y stage&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_1_15_1.png" src="../_images/notebooks_pipeline_1_15_1.png" />
+</div>
+</div>
+<p>How does disease stage differ among genders?</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[105]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Stages by gender</span>
+<span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;Gender&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;Gender&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">demographics</span><span class="p">,</span>
+              <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Hoehn&#39;</span><span class="p">,</span>
+              <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Gender&#39;</span><span class="p">,</span>
+              <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set3&quot;</span>
+              <span class="p">)</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Disease stage by gender in &quot;</span> <span class="o">+</span> <span class="n">dataset</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;H&amp;Y stage&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/song/Library/Python/3.9/lib/python/site-packages/seaborn/_core.py:1225: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[105]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0, &#39;H&amp;Y stage&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_1_17_2.png" src="../_images/notebooks_pipeline_1_17_2.png" />
+</div>
+</div>
+</section>
+<section id="Inputting/adjusting-hyperparameters">
+<h2>Inputting/adjusting hyperparameters<a class="headerlink" href="#Inputting/adjusting-hyperparameters" title="Link to this heading">#</a></h2>
+<p>Since the input data is ordinal, the SuStaIn version being used is <strong>Ordinal SuStaIn</strong>.</p>
+<p>Values to be input by user (hyperparameters of the model):</p>
+<ul class="simple">
+<li><p><em>n_s_max</em>: models with 1 to <em>n_s_max</em> clusters will be fit by the algorithm</p></li>
+<li><p><em>n_iterations</em>: number of MCMC iterations</p></li>
+</ul>
+<p>Those values need to be adjusted in the process of hyperparameter tuning. For now, this needs to be done manually. Tools (<em>i.e.</em> Optuna, WandB sweeps) are currently explored to automate this process.</p>
+<p><strong>To set the hyperparameters, input the values directly.</strong></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[116]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># n_s_max</span>
+<span class="n">n_s_max</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a value for n_s_max: &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max number of clusters is set to:&quot;</span><span class="p">,</span> <span class="n">n_s_max</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Max number of clusters is set to: 4
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[117]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># n_iterations</span>
+<span class="n">n_iterations</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a value for n_iterations: &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of MCMC iterations is set to:&quot;</span><span class="p">,</span> <span class="n">n_iterations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Number of MCMC iterations is set to: 100000
+</pre></div></div>
+</div>
+</section>
+<section id="Running-the-algorithm">
+<h2>Running the algorithm<a class="headerlink" href="#Running-the-algorithm" title="Link to this heading">#</a></h2>
+<p>Here, the SuStaIn algorithm is called with the inputs prepared previously. The runs are tracked on wandb. The following code needs to be executed on every run.</p>
+<ul class="simple">
+<li><p>For the <strong>training</strong> phase: the output folder (var ‘<em>output_path</em>’) has to be empty, which will trigger the algorithm to run on the data provided as input (training set).</p></li>
+<li><p>Fort the <strong>validation</strong> phase: the output folder has to point to the previously trained model folder. The trained model will be fit to the validation set.</p></li>
+<li><p>For the <strong>testing</strong> phase: the output folder has to point to the previously trained model folder. The trained model will be fit to the test set.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[108]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_no</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">999</span><span class="p">)</span>
+
+<span class="n">output_path</span> <span class="o">=</span> <span class="n">output_folder</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">output_no</span><span class="p">)</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">biomarkers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cognition&#39;</span><span class="p">,</span> <span class="s1">&#39;Psychosis&#39;</span><span class="p">,</span> <span class="s1">&#39;Depression&#39;</span><span class="p">,</span> <span class="s1">&#39;Anxiety&#39;</span><span class="p">,</span> <span class="s1">&#39;Apathy&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Impulsivity&#39;</span><span class="p">,</span> <span class="s1">&#39;Insomnia&#39;</span><span class="p">,</span> <span class="s1">&#39;Sleepiness&#39;</span><span class="p">,</span> <span class="s1">&#39;Pain&#39;</span><span class="p">,</span> <span class="s1">&#39;Incontinence&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Constipation&#39;</span><span class="p">,</span> <span class="s1">&#39;Dizziness&#39;</span><span class="p">,</span> <span class="s1">&#39;Fatigue&#39;</span><span class="p">,</span> <span class="s1">&#39;Speech&#39;</span><span class="p">,</span> <span class="s1">&#39;Drooling&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Swallowing&#39;</span><span class="p">,</span> <span class="s1">&#39;Eating&#39;</span><span class="p">,</span> <span class="s1">&#39;Dressing&#39;</span><span class="p">,</span> <span class="s1">&#39;Hygiene&#39;</span><span class="p">,</span> <span class="s1">&#39;Handwriting&#39;</span><span class="p">,</span> <span class="s1">&#39;Hobbies&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Rolling&#39;</span><span class="p">,</span> <span class="s1">&#39;Tremor&#39;</span><span class="p">,</span> <span class="s1">&#39;Arising&#39;</span><span class="p">,</span> <span class="s1">&#39;Walking&#39;</span><span class="p">,</span> <span class="s1">&#39;Freezing&#39;</span><span class="p">]</span>
+
+<span class="c1"># start a new wandb run to track this script</span>
+<span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="c1"># set the wandb project where this run will be logged</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">&quot;Brainhack pySuStaIn&quot;</span><span class="p">,</span>
+
+    <span class="c1"># track hyperparameters and run metadata</span>
+    <span class="n">config</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">&quot;dataset&quot;</span><span class="p">:</span> <span class="n">dataset</span><span class="p">,</span>
+    <span class="s2">&quot;output_no&quot;</span><span class="p">:</span> <span class="n">output_no</span><span class="p">,</span>
+    <span class="s2">&quot;n_s_max&quot;</span><span class="p">:</span> <span class="n">n_s_max</span><span class="p">,</span>
+    <span class="s2">&quot;n_iterations&quot;</span><span class="p">:</span> <span class="n">n_iterations</span><span class="p">,</span>
+    <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="n">seed</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># create folder for results if it doesn&#39;t exist already</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">output_path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+
+<span class="c1"># The initializer for the scored events model implementation of AbstractSustain</span>
+<span class="c1">#         Parameters:</span>
+<span class="c1">#           prob_nl                     - probability of negative/normal class for all subjects across all biomarkers</span>
+<span class="c1">#                                         dim: number of subjects x number of biomarkers</span>
+
+<span class="c1">#           prob_score                  - probability of each score for all subjects across all biomarkers</span>
+<span class="c1">#                                         dim: number of subjects x number of biomarkers x number of scores</span>
+<span class="c1">#           score_vals                  - a matrix specifying the scores for each biomarker</span>
+<span class="c1">#                                         dim: number of biomarkers x number of scores</span>
+<span class="c1">#           biomarker_labels            - the names of the biomarkers as a list of strings</span>
+<span class="c1">#           N_startpoints               - number of startpoints to use in maximum likelihood step of SuStaIn, typically 25</span>
+<span class="c1">#           N_S_max                     - maximum number of subtypes, should be 1 or more</span>
+<span class="c1">#           N_iterations_MCMC           - number of MCMC iterations, typically 1e5 or 1e6 but can be lower for debugging</span>
+<span class="c1">#           output_folder               - where to save pickle files, etc.</span>
+<span class="c1">#           dataset_name                - for naming pickle files</span>
+<span class="c1">#           use_parallel_startpoints    - boolean for whether or not to parallelize the maximum likelihood loop</span>
+<span class="c1">#           seed                        - random number seed</span>
+
+<span class="n">sustain_input_zscore</span> <span class="o">=</span> <span class="n">pySuStaIn</span><span class="o">.</span><span class="n">OrdinalSustain</span><span class="p">(</span>
+                            <span class="n">prob_nl</span><span class="p">,</span>
+                            <span class="n">prob_score</span><span class="p">,</span>
+                            <span class="n">score_vals</span><span class="p">,</span>
+                            <span class="n">biomarkers</span><span class="p">,</span>
+                            <span class="mi">25</span><span class="p">,</span>
+                            <span class="nb">int</span><span class="p">(</span><span class="n">n_s_max</span><span class="p">),</span>
+                            <span class="nb">int</span><span class="p">(</span><span class="n">n_iterations</span><span class="p">),</span>
+                            <span class="n">output_path</span><span class="p">,</span>
+                            <span class="n">dataset</span><span class="p">,</span>
+                            <span class="kc">True</span><span class="p">,</span>
+                            <span class="n">seed</span><span class="p">)</span>
+<span class="n">samples_sequence</span><span class="p">,</span>   \
+<span class="n">samples_f</span><span class="p">,</span>          \
+<span class="n">ml_subtype</span><span class="p">,</span>         \
+<span class="n">prob_ml_subtype</span><span class="p">,</span>    \
+<span class="n">ml_stage</span><span class="p">,</span>           \
+<span class="n">prob_ml_stage</span><span class="p">,</span>      \
+<span class="n">prob_subtype_stage</span>  <span class="o">=</span> <span class="n">sustain_input_zscore</span><span class="o">.</span><span class="n">run_sustain_algorithm</span><span class="p">()</span>
+
+<span class="n">wandb</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+wandb version 0.17.2 is available!  To upgrade, please run:
+ $ pip install wandb --upgrade</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+Tracking run with wandb version 0.17.1</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+Run data is saved locally in <code>/Users/song/Documents/dev/repos/10. brainhack 2024/bhSubtypingPD/brainhack_source/notebooks/wandb/run-20240621_002814-rwytirqc</code></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+Syncing run <strong><a href='https://wandb.ai/song-y/Brainhack%20pySuStaIn/runs/rwytirqc' target="_blank">polar-gorge-11</a></strong> to <a href='https://wandb.ai/song-y/Brainhack%20pySuStaIn' target="_blank">Weights & Biases</a> (<a href='https://wandb.me/run' target="_blank">docs</a>)<br/></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+View project at <a href='https://wandb.ai/song-y/Brainhack%20pySuStaIn' target="_blank">https://wandb.ai/song-y/Brainhack%20pySuStaIn</a></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+View run at <a href='https://wandb.ai/song-y/Brainhack%20pySuStaIn/runs/rwytirqc' target="_blank">https://wandb.ai/song-y/Brainhack%20pySuStaIn/runs/rwytirqc</a></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Found pickle file: /Users/song/Documents/dev/repos/10. brainhack 2024/bhSubtypingPD/brainhack_source/results/532/pickle_files/copn_subtype0.pickle. Using pickled variables for 0 subtype.
+Found pickle file: /Users/song/Documents/dev/repos/10. brainhack 2024/bhSubtypingPD/brainhack_source/results/532/pickle_files/copn_subtype1.pickle. Using pickled variables for 1 subtype.
+Found pickle file: /Users/song/Documents/dev/repos/10. brainhack 2024/bhSubtypingPD/brainhack_source/results/532/pickle_files/copn_subtype2.pickle. Using pickled variables for 2 subtype.
+Found pickle file: /Users/song/Documents/dev/repos/10. brainhack 2024/bhSubtypingPD/brainhack_source/results/532/pickle_files/copn_subtype3.pickle. Using pickled variables for 3 subtype.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "1ba51af6561c48dfaa418d390beed31a", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+View run <strong style="color:#cdcd00">polar-gorge-11</strong> at: <a href='https://wandb.ai/song-y/Brainhack%20pySuStaIn/runs/rwytirqc' target="_blank">https://wandb.ai/song-y/Brainhack%20pySuStaIn/runs/rwytirqc</a><br/> View project at: <a href='https://wandb.ai/song-y/Brainhack%20pySuStaIn' target="_blank">https://wandb.ai/song-y/Brainhack%20pySuStaIn</a><br/>Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+Find logs at: <code>./wandb/run-20240621_002814-rwytirqc/logs</code></div>
+</div>
+<p>Let’s view the results.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[115]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="n">imageList</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">output_path</span> <span class="o">+</span> <span class="s1">&#39;/plots&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">imageList</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">imageList</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.png&#39;</span><span class="p">):</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">output_path</span> <span class="o">+</span> <span class="s1">&#39;/plots/&#39;</span> <span class="o">+</span> <span class="n">image</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;.DS_Store&#39;, &#39;4subtypes.png&#39;, &#39;3subtypes.png&#39;]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_1_24_1.png" src="../_images/notebooks_pipeline_1_24_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_1_24_2.png" src="../_images/notebooks_pipeline_1_24_2.png" />
+</div>
+</div>
+<p>Let’s write the results to a file.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_subtypes</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">pickle_filename_s</span> <span class="o">=</span> <span class="n">output_folder</span> <span class="o">+</span> <span class="s1">&#39;/pickle_files/&#39;</span> <span class="o">+</span> <span class="n">dataset</span> <span class="o">+</span> <span class="s1">&#39;_subtype&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_subtypes</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.pickle&#39;</span>
+<span class="n">pk</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">pickle_filename_s</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ml_subtype&#39;</span><span class="p">,</span> <span class="c1"># the assigned subtype</span>
+                 <span class="s1">&#39;prob_ml_subtype&#39;</span><span class="p">,</span> <span class="c1"># the probability of the assigned subtype</span>
+                 <span class="s1">&#39;ml_stage&#39;</span><span class="p">,</span> <span class="c1"># the assigned stage</span>
+                 <span class="s1">&#39;prob_ml_stage&#39;</span><span class="p">,]:</span> <span class="c1"># the probability of the assigned stage</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
+
+    <span class="c1"># Add SuStaIn output to dataframe</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">pk</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span>
+
+<span class="c1"># Write results to excel file</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">output_folder</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">output_no</span> <span class="o">+</span> <span class="s1">&#39;.xlsx&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;openpyxl&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">if_sheet_exists</span> <span class="o">=</span> <span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="n">n_subtypes</span><span class="p">)</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Model-stability-tracking">
+<h2>Model stability tracking<a class="headerlink" href="#Model-stability-tracking" title="Link to this heading">#</a></h2>
+<p>In order to find the optimal hyperparameter values for our trained model, we need to evaluate the stability of the obtained models throughout the hyperparameter tuning process. This can be done by using the <strong>Adjusted Rand Index (ARI)</strong>.</p>
+<section id="Adjusted-Rand-Index-(ARI)">
+<h3>Adjusted Rand Index (ARI)<a class="headerlink" href="#Adjusted-Rand-Index-(ARI)" title="Link to this heading">#</a></h3>
+<p>The ARI is a measure of the similarity between two data clusterings. The Rand Index computes a similarity measure between two clusterings by considering all pairs of samples and counting pairs that are assigned in the same or different clusters in the predicted and true clusterings. The raw RI score is then “adjusted for chance” into the ARI score.</p>
+<p>The ARI ranges from − 1 to + 1:</p>
+<ul class="simple">
+<li><p>ARI = 1: Perfect agreement between clusterings</p></li>
+<li><p>ARI = 0: The expected similarity between two random clusterings (given the same number of clusters and points)</p></li>
+<li><p>ARI = -1: Perfect disagreement between clusterings</p></li>
+</ul>
+<p><strong>To compare two models, input the ‘output_no’ of the two models.</strong></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[119]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_excel_path</span><span class="p">(</span><span class="n">no_model</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">output_folder</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">no_model</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">no_model</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.xlsx&quot;</span>
+
+<span class="k">def</span> <span class="nf">get_input_model</span><span class="p">(</span><span class="n">no_model</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">get_excel_path</span><span class="p">(</span><span class="n">no_model</span><span class="p">),</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;stability&quot;</span><span class="p">)[</span><span class="s2">&quot;Stab&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">no_model_1</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="n">no_model_2</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First model: #&quot;</span><span class="p">,</span> <span class="n">no_model_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Second model: #&quot;</span><span class="p">,</span> <span class="n">no_model_2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ARI: &#39;</span><span class="p">,</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">get_input_model</span><span class="p">(</span><span class="n">no_model_1</span><span class="p">),</span> <span class="n">get_input_model</span><span class="p">(</span><span class="n">no_model_2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+First model: # 841
+Second model: # 532
+ARI:  0.1443848207063997
+</pre></div></div>
+</div>
+<p>Here, an ARI of 0.14 indicates that the clustering results from the two models show some level of similarity beyond what would be expected by chance, but it is not very high. Hyperparameters therefore need to be adjusted in consequence.</p>
+</section>
+</section>
+<section id="Model-performance-evaluation">
+<h2>Model performance evaluation<a class="headerlink" href="#Model-performance-evaluation" title="Link to this heading">#</a></h2>
+<p>Clustering requires evaluating the quality and meaningfulness of the clusters created by the model. With no known ground truth labels, evaluation must be performed using the model itself, through internal evaluation metrics, such as the <a class="reference external" href="https://www.sciencedirect.com/science/article/abs/pii/B9780128219294000020">silhouette coefficient</a>.</p>
+<section id="Silhouette-coefficient">
+<h3>Silhouette coefficient<a class="headerlink" href="#Silhouette-coefficient" title="Link to this heading">#</a></h3>
+<p>The silhouette score is a metric that measures how well each data point fits into its assigned cluster, by measuring how similar a point is to its own cluster (cohesion) compared to other clusters (separation). Values range from -1 to 1, where a higher value indicates better-defined clusters.</p>
+<p><strong>Input the output_no of a model to compute its silhouette coefficient.</strong></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[132]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># User input for output_no</span>
+<span class="n">output_no</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter output_no: &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selected model: #&quot;</span><span class="p">,</span> <span class="n">output_no</span><span class="p">)</span>
+
+<span class="c1"># Computing the silhouette coefficient</span>
+<br/><br/><br/><br/><br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Selected model: # 532
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[127]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">pairwise_distances</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="n">kmeans_model</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">kmeans_model</span><span class="o">.</span><span class="n">labels_</span>
+<span class="n">metrics</span><span class="o">.</span><span class="n">silhouette_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/song/Library/Python/3.9/lib/python/site-packages/sklearn/cluster/_kmeans.py:1416: FutureWarning: The default value of `n_init` will change from 10 to &#39;auto&#39; in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  super()._check_params_vs_input(X, default_n_init=10)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[127]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.5528190123564095
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[129]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[5.1 3.5 1.4 0.2]
+ [4.9 3.  1.4 0.2]
+ [4.7 3.2 1.3 0.2]
+ [4.6 3.1 1.5 0.2]
+ [5.  3.6 1.4 0.2]
+ [5.4 3.9 1.7 0.4]
+ [4.6 3.4 1.4 0.3]
+ [5.  3.4 1.5 0.2]
+ [4.4 2.9 1.4 0.2]
+ [4.9 3.1 1.5 0.1]
+ [5.4 3.7 1.5 0.2]
+ [4.8 3.4 1.6 0.2]
+ [4.8 3.  1.4 0.1]
+ [4.3 3.  1.1 0.1]
+ [5.8 4.  1.2 0.2]
+ [5.7 4.4 1.5 0.4]
+ [5.4 3.9 1.3 0.4]
+ [5.1 3.5 1.4 0.3]
+ [5.7 3.8 1.7 0.3]
+ [5.1 3.8 1.5 0.3]
+ [5.4 3.4 1.7 0.2]
+ [5.1 3.7 1.5 0.4]
+ [4.6 3.6 1.  0.2]
+ [5.1 3.3 1.7 0.5]
+ [4.8 3.4 1.9 0.2]
+ [5.  3.  1.6 0.2]
+ [5.  3.4 1.6 0.4]
+ [5.2 3.5 1.5 0.2]
+ [5.2 3.4 1.4 0.2]
+ [4.7 3.2 1.6 0.2]
+ [4.8 3.1 1.6 0.2]
+ [5.4 3.4 1.5 0.4]
+ [5.2 4.1 1.5 0.1]
+ [5.5 4.2 1.4 0.2]
+ [4.9 3.1 1.5 0.2]
+ [5.  3.2 1.2 0.2]
+ [5.5 3.5 1.3 0.2]
+ [4.9 3.6 1.4 0.1]
+ [4.4 3.  1.3 0.2]
+ [5.1 3.4 1.5 0.2]
+ [5.  3.5 1.3 0.3]
+ [4.5 2.3 1.3 0.3]
+ [4.4 3.2 1.3 0.2]
+ [5.  3.5 1.6 0.6]
+ [5.1 3.8 1.9 0.4]
+ [4.8 3.  1.4 0.3]
+ [5.1 3.8 1.6 0.2]
+ [4.6 3.2 1.4 0.2]
+ [5.3 3.7 1.5 0.2]
+ [5.  3.3 1.4 0.2]
+ [7.  3.2 4.7 1.4]
+ [6.4 3.2 4.5 1.5]
+ [6.9 3.1 4.9 1.5]
+ [5.5 2.3 4.  1.3]
+ [6.5 2.8 4.6 1.5]
+ [5.7 2.8 4.5 1.3]
+ [6.3 3.3 4.7 1.6]
+ [4.9 2.4 3.3 1. ]
+ [6.6 2.9 4.6 1.3]
+ [5.2 2.7 3.9 1.4]
+ [5.  2.  3.5 1. ]
+ [5.9 3.  4.2 1.5]
+ [6.  2.2 4.  1. ]
+ [6.1 2.9 4.7 1.4]
+ [5.6 2.9 3.6 1.3]
+ [6.7 3.1 4.4 1.4]
+ [5.6 3.  4.5 1.5]
+ [5.8 2.7 4.1 1. ]
+ [6.2 2.2 4.5 1.5]
+ [5.6 2.5 3.9 1.1]
+ [5.9 3.2 4.8 1.8]
+ [6.1 2.8 4.  1.3]
+ [6.3 2.5 4.9 1.5]
+ [6.1 2.8 4.7 1.2]
+ [6.4 2.9 4.3 1.3]
+ [6.6 3.  4.4 1.4]
+ [6.8 2.8 4.8 1.4]
+ [6.7 3.  5.  1.7]
+ [6.  2.9 4.5 1.5]
+ [5.7 2.6 3.5 1. ]
+ [5.5 2.4 3.8 1.1]
+ [5.5 2.4 3.7 1. ]
+ [5.8 2.7 3.9 1.2]
+ [6.  2.7 5.1 1.6]
+ [5.4 3.  4.5 1.5]
+ [6.  3.4 4.5 1.6]
+ [6.7 3.1 4.7 1.5]
+ [6.3 2.3 4.4 1.3]
+ [5.6 3.  4.1 1.3]
+ [5.5 2.5 4.  1.3]
+ [5.5 2.6 4.4 1.2]
+ [6.1 3.  4.6 1.4]
+ [5.8 2.6 4.  1.2]
+ [5.  2.3 3.3 1. ]
+ [5.6 2.7 4.2 1.3]
+ [5.7 3.  4.2 1.2]
+ [5.7 2.9 4.2 1.3]
+ [6.2 2.9 4.3 1.3]
+ [5.1 2.5 3.  1.1]
+ [5.7 2.8 4.1 1.3]
+ [6.3 3.3 6.  2.5]
+ [5.8 2.7 5.1 1.9]
+ [7.1 3.  5.9 2.1]
+ [6.3 2.9 5.6 1.8]
+ [6.5 3.  5.8 2.2]
+ [7.6 3.  6.6 2.1]
+ [4.9 2.5 4.5 1.7]
+ [7.3 2.9 6.3 1.8]
+ [6.7 2.5 5.8 1.8]
+ [7.2 3.6 6.1 2.5]
+ [6.5 3.2 5.1 2. ]
+ [6.4 2.7 5.3 1.9]
+ [6.8 3.  5.5 2.1]
+ [5.7 2.5 5.  2. ]
+ [5.8 2.8 5.1 2.4]
+ [6.4 3.2 5.3 2.3]
+ [6.5 3.  5.5 1.8]
+ [7.7 3.8 6.7 2.2]
+ [7.7 2.6 6.9 2.3]
+ [6.  2.2 5.  1.5]
+ [6.9 3.2 5.7 2.3]
+ [5.6 2.8 4.9 2. ]
+ [7.7 2.8 6.7 2. ]
+ [6.3 2.7 4.9 1.8]
+ [6.7 3.3 5.7 2.1]
+ [7.2 3.2 6.  1.8]
+ [6.2 2.8 4.8 1.8]
+ [6.1 3.  4.9 1.8]
+ [6.4 2.8 5.6 2.1]
+ [7.2 3.  5.8 1.6]
+ [7.4 2.8 6.1 1.9]
+ [7.9 3.8 6.4 2. ]
+ [6.4 2.8 5.6 2.2]
+ [6.3 2.8 5.1 1.5]
+ [6.1 2.6 5.6 1.4]
+ [7.7 3.  6.1 2.3]
+ [6.3 3.4 5.6 2.4]
+ [6.4 3.1 5.5 1.8]
+ [6.  3.  4.8 1.8]
+ [6.9 3.1 5.4 2.1]
+ [6.7 3.1 5.6 2.4]
+ [6.9 3.1 5.1 2.3]
+ [5.8 2.7 5.1 1.9]
+ [6.8 3.2 5.9 2.3]
+ [6.7 3.3 5.7 2.5]
+ [6.7 3.  5.2 2.3]
+ [6.3 2.5 5.  1.9]
+ [6.5 3.  5.2 2. ]
+ [6.2 3.4 5.4 2.3]
+ [5.9 3.  5.1 1.8]]
+[1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 2 2 2 2 0 2 2 2 2
+ 2 2 0 0 2 2 2 2 0 2 0 2 0 2 2 0 0 2 2 2 2 2 0 2 2 2 2 0 2 2 2 0 2 2 2 0 2
+ 2 0]
+</pre></div></div>
+</div>
+<p>Furthermore, the authors of the algorithm provide the following code for plotting the models’ likelihood. These plots help in choosing the appropriate model (most appropriate number of subtypes to fit the data).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[125]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="c1"># go through each subtypes model and plot MCMC samples of the likelihood</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">pickle_filename_s</span>           <span class="o">=</span> <span class="n">output_folder</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">output_no</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/pickle_files/&#39;</span> <span class="o">+</span> <span class="n">dataset</span> <span class="o">+</span> <span class="s1">&#39;_subtype&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.pickle&#39;</span>
+    <span class="n">pickle_filepath</span>             <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">pickle_filename_s</span><span class="p">)</span>
+    <span class="n">pickle_file</span>                 <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">pickle_filename_s</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+    <span class="n">loaded_variables</span>            <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">pickle_file</span><span class="p">)</span>
+    <span class="n">samples_likelihood</span>          <span class="o">=</span> <span class="n">loaded_variables</span><span class="p">[</span><span class="s2">&quot;samples_likelihood&quot;</span><span class="p">]</span>
+    <span class="n">pickle_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">),</span> <span class="n">samples_likelihood</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;subtype&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">samples_likelihood</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;subtype&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;MCMC samples&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Log likelihood&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MCMC trace&#39;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Log likelihood&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of samples&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histograms of model likelihood&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_1_35_0.png" src="../_images/notebooks_pipeline_1_35_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_1_35_1.png" src="../_images/notebooks_pipeline_1_35_1.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="What-is-next?">
+<h2>What is next?<a class="headerlink" href="#What-is-next?" title="Link to this heading">#</a></h2>
+<p>In conclusion, Pipeline #1 implements SuStaIn on non-motor symptoms (NMS) datasets. The next steps for this pipeline will be to automate hyperparameter tuning, as well as implementing cross-validation, which is provided with the algorithm.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Grandpa is moody, will his cognition decline?</strong> Predicting cognitive and neural decline in Parkinson’s disease from non-motor symptoms evolution</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pipeline_2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Pipeline #2 - Imaging</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Pipeline-overview">Pipeline overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Data-visualization">Data visualization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Inputting/adjusting-hyperparameters">Inputting/adjusting hyperparameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Running-the-algorithm">Running the algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Model-stability-tracking">Model stability tracking</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Adjusted-Rand-Index-(ARI)">Adjusted Rand Index (ARI)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Model-performance-evaluation">Model performance evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Silhouette-coefficient">Silhouette coefficient</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#What-is-next?">What is next?</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/notebooks/pipeline_1.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Y Song.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

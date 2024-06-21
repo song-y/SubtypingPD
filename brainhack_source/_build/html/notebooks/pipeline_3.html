@@ -1,0 +1,975 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Pipeline #3 - Statistical analyses &#8212; Subtyping PD 1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/pipeline_3';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Pipeline #2 - Imaging" href="pipeline_2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bh.png" class="logo__image only-light" alt="Subtyping PD 1.0 documentation - Home"/>
+    <script>document.write(`<img src="../_static/bh.png" class="logo__image only-dark" alt="Subtyping PD 1.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item pst-header-nav-item">
+  <a class="nav-link nav-internal" href="pipeline_1.html">
+    Pipeline #1 - Clustering
+  </a>
+</li>
+
+
+<li class="nav-item pst-header-nav-item">
+  <a class="nav-link nav-internal" href="pipeline_2.html">
+    Pipeline #2 - Imaging
+  </a>
+</li>
+
+
+<li class="nav-item pst-header-nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Pipeline #3 - Statistical analyses
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item pst-header-nav-item">
+  <a class="nav-link nav-internal" href="pipeline_1.html">
+    Pipeline #1 - Clustering
+  </a>
+</li>
+
+
+<li class="nav-item pst-header-nav-item">
+  <a class="nav-link nav-internal" href="pipeline_2.html">
+    Pipeline #2 - Imaging
+  </a>
+</li>
+
+
+<li class="nav-item pst-header-nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Pipeline #3 - Statistical analyses
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Pipeline #3...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Pipeline-#3---Statistical-analyses">
+<h1>Pipeline #3 - Statistical analyses<a class="headerlink" href="#Pipeline-#3---Statistical-analyses" title="Link to this heading">#</a></h1>
+<p><img alt="65f4805cae994d03a8a7b16b9cf83ec1" class="no-scaled-link" src="../_images/pipeline3.png" style="width: 550px;" /></p>
+<p>This final phase of the project addresses our main question:</p>
+<p><strong>Is there a PD subtype associated with faster cognitive and neural decline?</strong></p>
+<p>To answer this question, statistical analyses will be run to compare the identified subtypes on their cognitive and neural decline.</p>
+<p><strong>Another disclaimer:</strong> the term <em>‘decline’</em> implies a progression over time, which is what this project aims to measure. However, due to current data accessibility constraints, cognitive measures for only one time point are available. Moreover, since a majority of MRI scans have not yet undergone processing, neural decline data remains unavailable. Consequently, for this deliverable, analyses will be conducted solely using cognition scores from a single time point. It is important to note that
+the results obtained from thoses analyses therefore don’t match our original research question. Once all data accessible, comparisons will involve assessing declines in both measures over multiple time points.</p>
+<section id="Pipeline-overview">
+<h2>Pipeline overview<a class="headerlink" href="#Pipeline-overview" title="Link to this heading">#</a></h2>
+<p>This pipeline implements basic statistical analyses in Python to compare groups. The idea is once again to have a template of some tests that will be run once we get the final clustering and imaging results. Specifically, this pipeline performs the following tasks:</p>
+<ul class="simple">
+<li><p>Descriptive statistics</p></li>
+<li><p>Statistical tests</p></li>
+<li><p>Visualization of results</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loading librairies</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">kruskal</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.multitest</span> <span class="kn">import</span> <span class="n">multipletests</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">f_oneway</span>
+<span class="kn">import</span> <span class="nn">scikit_posthocs</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">linregress</span>
+<span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">cm</span>
+
+<span class="c1"># Provide path to results on which to run analyses</span>
+<span class="n">prelim_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;/Users/song/Documents/dev/repos/10. brainhack 2024/bhSubtypingPD/brainhack_source/results/841/841.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;3st&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Descriptive-statistics">
+<h2>Descriptive statistics<a class="headerlink" href="#Descriptive-statistics" title="Link to this heading">#</a></h2>
+<p>Let’s take a look at our results from the descriptive aspect.</p>
+<p>How many participants in each group?</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># subtype 0</span>
+<span class="n">st_0</span> <span class="o">=</span> <span class="n">prelim_results</span><span class="p">[</span><span class="n">prelim_results</span><span class="p">[</span><span class="s1">&#39;ml_subtype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># subtype 1</span>
+<span class="n">st_1</span> <span class="o">=</span> <span class="n">prelim_results</span><span class="p">[</span><span class="n">prelim_results</span><span class="p">[</span><span class="s1">&#39;ml_subtype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># subtype 2</span>
+<span class="n">st_2</span> <span class="o">=</span> <span class="n">prelim_results</span><span class="p">[</span><span class="n">prelim_results</span><span class="p">[</span><span class="s1">&#39;ml_subtype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="n">participants_count</span> <span class="o">=</span> <span class="n">prelim_results</span><span class="p">[</span><span class="s1">&#39;ml_subtype&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of participants in each group:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">participants_count</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Number of participants in each group:
+ml_subtype
+0    409
+1    316
+2    231
+Name: count, dtype: int64
+</pre></div></div>
+</div>
+<p>Computes descriptive statistics such as mean, median, standard deviation, etc., for each subtype identified previously.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">prelim_results</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;ml_subtype&#39;</span><span class="p">)[[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Onset&#39;</span><span class="p">,</span> <span class="s1">&#39;Duration&#39;</span><span class="p">,</span> <span class="s1">&#39;Hoehn&#39;</span><span class="p">,</span> <span class="s1">&#39;MoCA&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+              Age                                                     Onset  \
+            count       mean       std   min   25%   50%   75%   max  count
+ml_subtype
+0           389.0  67.187661  8.661638  39.0  62.0  68.0  74.0  88.0  382.0
+1           299.0  66.026756  9.453487  38.0  60.5  67.0  73.0  90.0  295.0
+2           217.0  66.161290  9.642056  36.0  60.0  67.0  73.0  86.0  215.0
+
+                       ... Hoehn        MoCA                                  \
+                 mean  ...   75%  max  count       mean       std  min   25%
+ml_subtype             ...
+0           60.819372  ...   3.0  4.0  361.0  24.944598  5.347090  0.0  24.0
+1           59.610169  ...   3.0  5.0  275.0  25.123636  5.056540  0.0  24.0
+2           60.488372  ...   3.0  5.0  204.0  25.264706  5.239912  0.0  24.0
+
+
+             50%   75%   max
+ml_subtype
+0           26.0  28.0  30.0
+1           26.0  28.0  30.0
+2           27.0  28.0  30.0
+
+[3 rows x 40 columns]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s look at the age, by subtype and gender</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;ml_subtype&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Gender&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">prelim_results</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age by subtype and gender&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Subtype&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Gender&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_8_0.png" src="../_images/notebooks_pipeline_3_8_0.png" />
+</div>
+</div>
+<p>The groups look similar…differences are hard to tell visually. Statistical analyses will confirm if there are significant differences.</p>
+</section>
+<section id="Statistical-tests-and-results-visualization">
+<h2>Statistical tests and results visualization<a class="headerlink" href="#Statistical-tests-and-results-visualization" title="Link to this heading">#</a></h2>
+<p>Conducts appropriate statistical tests to compare groups on their cognitive decline and neural decline, and visualize the results graphically.</p>
+<ul class="simple">
+<li><p><strong>Cognitive</strong> decline measured with MoCA scores</p></li>
+<li><p><strong>Neural</strong> decline measured with cortical thickness and volume data</p></li>
+</ul>
+<p>We saw in early analyses that the MoCA score was <strong>not normally distributed</strong> accross the COPN dataset:</p>
+<p><img alt="084c54287a93499685445596c84b257b" src="../_images/moca_skewed.png" /></p>
+<p>A solution would be to perform non-parametric tests when analyzing the cognition variable. An appropriate test is the <strong>Kruskal-Wallis test with Bonferroni correction</strong> for multiple comparisons.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform Kruskal-Wallis test</span>
+<span class="n">stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">kruskal</span><span class="p">(</span><span class="n">st_0</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;MoCA&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">st_1</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;MoCA&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">st_2</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;MoCA&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+
+<span class="c1"># Adjust p-values using Bonferroni correction</span>
+<span class="n">no_comparisons</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">adjusted_p_values</span> <span class="o">=</span> <span class="n">multipletests</span><span class="p">([</span><span class="n">p_value</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bonferroni&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kruskal-Wallis Test statistic: </span><span class="si">{</span><span class="n">stat</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Raw p-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Adjusted p-value (Bonferroni): </span><span class="si">{</span><span class="n">adjusted_p_values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">adjusted_p_values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reject null hypothesis: Groups have different medians.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fail to reject null hypothesis: No significant difference in medians.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Kruskal-Wallis Test statistic: 3.8109
+Raw p-value: 0.1488
+Adjusted p-value (Bonferroni): 0.1488
+Fail to reject null hypothesis: No significant difference in medians.
+</pre></div></div>
+</div>
+<p>Here, the difference between subtypes in cognition at one time point is not significant.</p>
+<p>Let’s look at the variable ‘Age’ that we plotted earlier. Since the age follow a normal distribution, let’s run a quick ANOVA with</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform ANOVA</span>
+<span class="n">stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">f_oneway</span><span class="p">(</span><span class="n">st_0</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">st_1</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">st_2</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;One-way ANOVA F-statistic: </span><span class="si">{</span><span class="n">stat</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">st_0</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;Age&#39;</span><span class="p">],</span>
+        <span class="n">st_1</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;Age&#39;</span><span class="p">],</span>
+        <span class="n">st_2</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;Age&#39;</span><span class="p">]]</span>
+
+<span class="c1"># If significant, perform posthoc comparisons with Dunn&#39;s test (holm corrected)</span>
+<span class="n">p_values</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">posthoc_dunn</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">p_adjust</span><span class="o">=</span><span class="s1">&#39;holm&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">p_values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+One-way ANOVA F-statistic: 3.0066
+P-value: 0.0505
+          1         2         3
+1  1.000000  0.149182  0.312913
+2  0.149182  1.000000  0.712782
+3  0.312913  0.712782  1.000000
+</pre></div></div>
+</div>
+<p>Here again, the age does not differ accross the identified subtypes.</p>
+<p>Now, what would be more interesting to look at are the differences accross subtypes for the clinical measures, aka the non-motor symptoms, the data used to perform the initial clustering. There definitely should be differences between groups on the different symptoms, otherwise, they wouldn’t have been classified into clusters…yes or no?</p>
+<p>Let’s assess, and plot only the symptoms with significant differences accross subtypes.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biomarkers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cognition&#39;</span><span class="p">,</span> <span class="s1">&#39;Psychosis&#39;</span><span class="p">,</span> <span class="s1">&#39;Depression&#39;</span><span class="p">,</span> <span class="s1">&#39;Anxiety&#39;</span><span class="p">,</span> <span class="s1">&#39;Apathy&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Impulsivity&#39;</span><span class="p">,</span> <span class="s1">&#39;Insomnia&#39;</span><span class="p">,</span> <span class="s1">&#39;Sleepiness&#39;</span><span class="p">,</span> <span class="s1">&#39;Pain&#39;</span><span class="p">,</span> <span class="s1">&#39;Incontinence&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Constipation&#39;</span><span class="p">,</span> <span class="s1">&#39;Dizziness&#39;</span><span class="p">,</span> <span class="s1">&#39;Fatigue&#39;</span><span class="p">,</span> <span class="s1">&#39;Speech&#39;</span><span class="p">,</span> <span class="s1">&#39;Drooling&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Swallowing&#39;</span><span class="p">,</span> <span class="s1">&#39;Eating&#39;</span><span class="p">,</span> <span class="s1">&#39;Dressing&#39;</span><span class="p">,</span> <span class="s1">&#39;Hygiene&#39;</span><span class="p">,</span> <span class="s1">&#39;Handwriting&#39;</span><span class="p">,</span> <span class="s1">&#39;Hobbies&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Rolling&#39;</span><span class="p">,</span> <span class="s1">&#39;Tremor&#39;</span><span class="p">,</span> <span class="s1">&#39;Arising&#39;</span><span class="p">,</span> <span class="s1">&#39;Walking&#39;</span><span class="p">,</span> <span class="s1">&#39;Freezing&#39;</span><span class="p">]</span>
+
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Subtype 0&#39;</span><span class="p">,</span> <span class="s1">&#39;Subtype 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Subtype 2&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">biomarker</span> <span class="ow">in</span> <span class="n">biomarkers</span><span class="p">:</span>
+
+    <span class="n">st_0_lst</span> <span class="o">=</span> <span class="n">st_0</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="n">biomarker</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">st_1_lst</span> <span class="o">=</span> <span class="n">st_1</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="n">biomarker</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">st_2_lst</span> <span class="o">=</span> <span class="n">st_2</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="n">biomarker</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+    <span class="c1"># Perform Kruskal-Wallis test</span>
+    <span class="n">stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">kruskal</span><span class="p">(</span><span class="n">st_0_lst</span><span class="p">,</span> <span class="n">st_1_lst</span><span class="p">,</span> <span class="n">st_2_lst</span><span class="p">)</span>
+
+    <span class="c1"># Adjust p-values using Bonferroni correction</span>
+    <span class="n">no_comparisons</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">adjusted_p_values</span> <span class="o">=</span> <span class="n">multipletests</span><span class="p">([</span><span class="n">p_value</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bonferroni&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># print(f&quot;Kruskal-Wallis Test statistic for &quot; + biomarker + &quot;: {stat:.4f}&quot;)</span>
+    <span class="c1"># print(f&quot;Raw p-value: {p_value:.4f}&quot;)</span>
+    <span class="c1"># print(f&quot;Adjusted p-value (Bonferroni): {adjusted_p_values[0]:.4f}&quot;)</span>
+
+    <span class="k">if</span> <span class="n">adjusted_p_values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Groups have significatively different means for &quot;</span> <span class="o">+</span> <span class="n">biomarker</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Plotting</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">st_0_lst</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">st_1_lst</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">st_2_lst</span><span class="p">)]</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">categories</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#fdaa48&#39;</span><span class="p">,</span><span class="s1">&#39;#6890F0&#39;</span><span class="p">,</span><span class="s1">&#39;#A890F0&#39;</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">biomarker</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Groups have significatively different means for Anxiety.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_16_1.png" src="../_images/notebooks_pipeline_3_16_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Groups have significatively different means for Apathy.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_16_3.png" src="../_images/notebooks_pipeline_3_16_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Groups have significatively different means for Insomnia.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_16_5.png" src="../_images/notebooks_pipeline_3_16_5.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Groups have significatively different means for Constipation.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_16_7.png" src="../_images/notebooks_pipeline_3_16_7.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Groups have significatively different means for Speech.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_16_9.png" src="../_images/notebooks_pipeline_3_16_9.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Groups have significatively different means for Drooling.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_16_11.png" src="../_images/notebooks_pipeline_3_16_11.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Groups have significatively different means for Swallowing.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_16_13.png" src="../_images/notebooks_pipeline_3_16_13.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Groups have significatively different means for Handwriting.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_16_15.png" src="../_images/notebooks_pipeline_3_16_15.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Groups have significatively different means for Rolling.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_16_17.png" src="../_images/notebooks_pipeline_3_16_17.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Groups have significatively different means for Tremor.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_16_19.png" src="../_images/notebooks_pipeline_3_16_19.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Groups have significatively different means for Arising.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_16_21.png" src="../_images/notebooks_pipeline_3_16_21.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Groups have significatively different means for Freezing.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_16_23.png" src="../_images/notebooks_pipeline_3_16_23.png" />
+</div>
+</div>
+<p>Lastly, let’s visualize the symptoms progressions for each subtype.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[84]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define colors for markers</span>
+<span class="n">color_all</span> <span class="o">=</span> <span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">tab10</span><span class="o">.</span><span class="n">colors</span><span class="p">[:</span><span class="mi">26</span><span class="p">])</span> <span class="o">*</span> <span class="mi">4</span>
+
+<span class="n">st_lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">st_0</span><span class="p">,</span> <span class="n">st_1</span><span class="p">,</span> <span class="n">st_2</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="n">st_lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">stage</span> <span class="o">=</span> <span class="n">st</span><span class="p">[</span><span class="s2">&quot;ml_stage&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">fig</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Subtype &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Stages&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Severity&quot;</span><span class="p">)</span>
+
+    <span class="n">marker_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">34</span><span class="p">):</span>
+        <span class="n">marker_name</span> <span class="o">=</span> <span class="n">marker_names</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">marker_data</span> <span class="o">=</span> <span class="n">st</span><span class="p">[</span><span class="n">marker_name</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+        <span class="c1"># Perform linear regression</span>
+        <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">linregress</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">marker_data</span><span class="p">)</span>
+
+        <span class="c1"># Create a regression line</span>
+        <span class="n">regression_line</span> <span class="o">=</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">stage</span> <span class="o">+</span> <span class="n">intercept</span>
+
+        <span class="n">color</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">rainbow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">27</span><span class="p">)))</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">regression_line</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color_all</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">marker_name</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_18_0.png" src="../_images/notebooks_pipeline_3_18_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_18_1.png" src="../_images/notebooks_pipeline_3_18_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pipeline_3_18_2.png" src="../_images/notebooks_pipeline_3_18_2.png" />
+</div>
+</div>
+<p>Progression patterns of non-motor symptoms seem to differ between subtypes. A deeper analysis comparing progression trends for each symptom is necessary to identify exact progression trends identified by the clustering algorithm.</p>
+</section>
+<section id="Conclusion">
+<h2>Conclusion<a class="headerlink" href="#Conclusion" title="Link to this heading">#</a></h2>
+<p>Writting this pipeline provided good practice in conducting basic statistical analyses and data visualization using Python packages. While there is room for improvement in terms of code cleanliness and efficiency, this pipeline serves as a good code foundation for the statistical comparisons that will be conducted in the project.</p>
+<p>Collectively, the three pipelines, along with the skills acquired through BH School, allowed for a comprehensive exploration of the toolkit for successfully completing the project’s objectives.</p>
+<p>A special thanks to Marie for your time, patience, and for sharing invaluable knowledge that will greatly contribute to the success of the project!</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="pipeline_2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Pipeline #2 - Imaging</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Pipeline-overview">Pipeline overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Descriptive-statistics">Descriptive statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Statistical-tests-and-results-visualization">Statistical tests and results visualization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/notebooks/pipeline_3.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Y Song.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

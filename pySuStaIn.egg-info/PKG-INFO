@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: pySuStaIn
+Version: 0.1
+Summary: Python implementation of the SuStaIn algorithm
+Home-page: https://github.com/ucl-pond/pySuStaIn
+Maintainer: Leon Aksman
+Maintainer-email: l.aksman@ucl.ac.uk
+License: TBC
+Platform: UNKNOWN
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python
+Classifier: Topic :: Scientific/Engineering
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.7
+License-File: LICENSE.txt
+
+UNKNOWN
+
